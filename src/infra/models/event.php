@@ -9,10 +9,10 @@ use Src\Application\Core\Model;
 
 class EventModel extends Model {
     public function create(int $user_id, string $title, string $description, string $thumbnail_url, DateTime $planned_events) : bool {
-        $sql = "
-            INSERT INTO cakevents (user_id, title, description, thumbnail, planned_events)
+        $sql = <<<SQL
+            INSERT INTO events (user_id, title, description, thumbnail, planned_events)
             VALUES (:user_id, :title, :description, :thumbnail, :planned_events)
-        ";
+        SQL;
         
         $stmt = $this->database->exec($sql, [
             ":user_id" => $user_id,
@@ -26,7 +26,7 @@ class EventModel extends Model {
     }
 
     public function getAllEvents() : array {
-        $sql = "
+        $sql = <<<SQL
             SELECT 
                 events.id, 
                 users.id AS user_id,
@@ -37,7 +37,7 @@ class EventModel extends Model {
                 events.thumbnail_url
             FROM events 
             INNER JOIN users ON events.user_id = users.id
-        ";
+        SQL;
     
         return $this->database->query($sql, []);
     }    
