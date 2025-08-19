@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../vendor/routes.autoload.php';
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Dotenv\Dotenv;
+use Src\Application\Routes\Router;
 use Src\Application\Controllers\CreateUserController;
 use Src\Application\Controllers\SignUpController;
 use Src\Application\Controllers\SignUpViewController;
@@ -12,8 +13,9 @@ use Src\Application\Controllers\CreatePasswordController;
 use Src\Application\Controllers\HomeController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
-use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
+# use Src\Application\Controllers\ViewEventsController;
+use Src\Application\Controllers\RegisterEventController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -29,5 +31,8 @@ $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMidd
 
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
+
+# $router->post("/api/v1/register/events", LoadEventsController::class, RedirectUserLoggedMiddleware::class);
+$router->get("/api/v1/view/event", RegisterEventController::class);
 
 $router->run();
