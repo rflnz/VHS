@@ -32,7 +32,7 @@ $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMidd
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
 
-# $router->post("/api/v1/register/events", LoadEventsController::class, RedirectUserLoggedMiddleware::class);
+# $router->post("/api/v1/register/events", ViewEventsController::class);
 $router->get("/api/v1/view/event", RegisterEventController::class);
 
 $router->run();
