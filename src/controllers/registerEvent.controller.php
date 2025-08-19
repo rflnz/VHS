@@ -24,7 +24,7 @@ class RegisterEventController extends Controller {
             return;
 
         } catch (\Throwable $exception) {
-            //
+            print_r($exception->getMessage());
         }
     }
 }
