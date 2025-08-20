@@ -28,88 +28,7 @@
         'date' => '09-08 18:15',
     ];
 
-    $techVideos = [
-        [
-            "url" => "https://youtube.com/watch?v=nextjs4",
-            "type_card" => "event",
-            "description" => "Rafael Germano",
-            "duration" => "7 min",
-            "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-            "username" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png", 
-            "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-            "views" => "8.5k views",
-            "created_at" => "há 2 semanas atrás",
-            "maked_for" => "Online",
-            "likes" => 750,
-            "comments" => 45,
-            "event_date" => "09/08 às 18:15"
-        ],
-        [
-            "url" => "https://youtube.com/watch?v=python2",
-            "type_card" => "event",
-            "description" => "Rafael Germano",
-            "duration" => "7 min",
-            "title" => "Aprenda PYTHON em 1 hora",
-            "username" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-            "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g", 
-            "views" => "8.5k views",
-            "created_at" => "há 2 semanas atrás",
-            "maked_for" => "Online",
-            "likes" => 750,
-            "comments" => 45,
-            "event_date" => "09/08 às 18:15"
-        ],
-        [
-            "url" => "https://youtube.com/watch?v=nextjs4",
-            "type_card" => "event",
-            "description" => "Rafael Germano",
-            "duration" => "7 min",
-            "title" => "Tudo sobre o Next.js 15, nova arquitetura de pasta",
-            "username" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png", 
-            "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g",
-            "views" => "8.5k views",
-            "created_at" => "há 2 semanas atrás",
-            "maked_for" => "Online",
-            "likes" => 750,
-            "comments" => 45,
-            "event_date" => "09/08 às 18:15",
-        ],
-        [
-            "url" => "https://youtube.com/watch?v=python2",
-            "type_card" => "event",
-            "description" => "Rafael Germano",
-            "duration" => "7 min",
-            "title" => "Aprenda PYTHON em 1 hora",
-            "username" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-            "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g", 
-            "views" => "8.5k views",
-            "created_at" => "há 2 semanas atrás",
-            "maked_for" => "Online",
-            "likes" => 750,
-            "comments" => 45,
-            "event_date" => "09/08 às 18:15"
-        ],
-        [
-            "url" => "https://youtube.com/watch?v=python2",
-            "type_card" => "event",
-            "description" => "Rafael Germano",
-            "duration" => "7 min",
-            "title" => "Aprenda PYTHON em 1 hora",
-            "username" => "Rafael Germano",
-            "thumbnail_url" => "https://framerusercontent.com/images/TO1bOWR2ihsAvIgtbf5Y9taYWZs.png",
-            "avatar_url" => "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS2EntOCdE0yEaIfacfxiU1ZyRi8RSeT-eu_HDeQSq6J_veZZesXpwlcxkWxM2NKMpWRb4CRyw9WdUGOQV7ZqK8g", 
-            "views" => "8.5k views",
-            "created_at" => "há 2 semanas atrás",
-            "maked_for" => "Online",
-            "likes" => 750,
-            "comments" => 45,
-            "event_date" => "09/08 às 18:15"
-        ]
-    ];
+    $events = [];
 
 ?>
 
@@ -151,7 +70,7 @@
                         <p class="text-gray-400 text-sm mb-6">Confira os vídeo mais populares da nossa plataforma VHS</p>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?= renderCards($techVideos, 'event'); ?>   
+                        <?= renderCards($events, 'event'); ?>   
                         </div>
                     </section>
             </div>

@@ -26,28 +26,25 @@ use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Controllers\SignInViewController;
 # use Src\Application\Controllers\ViewEventsController;
 use Src\Application\Controllers\RegisterEventController;
+use Src\Application\Controllers\ViewEventController;
+use Src\Application\Controllers\ViewEventsController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
 
 $router = new Router();
 
-#api routes
-$router->post('/api/v1/auth/signin', SignInController::class);
-
-$router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
+# API Routes
 $router->post('/api/v1/auth/signup', SignUpController::class);
+$router->post("/api/v1/signup/password", CreateUserController::class, RedirectUserLoggedMiddleware::class);
+$router->post('/api/v1/auth/signin', SignInController::class);
+$router->post("/api/v1/register/events", RegisterEventController::class);
 
-
-#views routes
+# Views Routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
-
 $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
-
 $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);
 $router->get("/auth/signup/password", CreatePasswordController::class, RedirectUserLoggedMiddleware::class);
-
-# $router->post("/api/v1/register/events", ViewEventsController::class);
-$router->get("/api/v1/view/event", RegisterEventController::class);
+$router->get("/api/v1/view/event", ViewEventsController::class);
 
 $router->run();

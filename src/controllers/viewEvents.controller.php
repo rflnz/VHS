@@ -8,13 +8,13 @@ require_once __DIR__ . '/../application/core/controller.php';
 use Src\Infra\Models\EventModel;
 use Src\Application\Core\Controller;
 
-class RegisterEventController extends Controller {
+class ViewEventsController extends Controller {
     private EventModel $eventModel;
 
     public function index() {
         try {
             $this->eventModel = $this->model("event");
-            $this->eventModel->createEvent($_POST['user_id'], $_POST['title'], $_POST['description'], $_POST['thumbnail_url'], new \DateTime($_POST['planned_events']));
+            $this->eventModel->getAllEvents();
             return;
 
         } catch (\Throwable $exception) {

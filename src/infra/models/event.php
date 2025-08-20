@@ -8,7 +8,7 @@ use DateTime;
 use Src\Application\Core\Model;
 
 class EventModel extends Model {
-    public function create(int $user_id, string $title, string $description, string $thumbnail_url, DateTime $planned_events) : bool {
+    public function createEvent(int $user_id, string $title, string $description, string $thumbnail_url, DateTime $planned_events) : bool {
         $sql = <<<SQL
             INSERT INTO events (user_id, title, description, thumbnail, planned_events)
             VALUES (:user_id, :title, :description, :thumbnail, :planned_events)
