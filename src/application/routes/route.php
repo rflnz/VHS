@@ -23,7 +23,6 @@ use Src\Application\Controllers\HomeController;
 use Src\Application\Middlewares\RedirectUserLoggedMiddleware;
 use Src\Application\Controllers\SignInController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
-use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
 # use Src\Application\Controllers\ViewEventsController;
 use Src\Application\Controllers\RegisterEventController;
