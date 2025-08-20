@@ -12,7 +12,7 @@
         $user_avatar = htmlspecialchars(!empty($user['avatar_url']) ? $user['avatar_url'] : '/VHS/public/icons/user.svg', ENT_QUOTES, 'UTF-8');
 
         $BarComponent = BarComponent();
-        echo UserMenu($user_avatar, $user['username'] ?? null, $user['email'] ?? null);
+        echo UserMenu('/VHS/public/images/ProfilePhoto.png', 'Guilherme Fretes Nascimento' ?? null, 'eu@freitasdev' ?? null);
 
         return <<<HTML
             <header id='header' class='bg-gradient-to-b from-[#000000] to-[#20002c] w-full h-18 flex items-center justify-between p-6 sticky top-0 z-20'>  
