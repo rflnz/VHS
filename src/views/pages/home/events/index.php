@@ -28,7 +28,8 @@
         'date' => '09-08 18:15',
     ];
 
-    $events = [];
+    $data = $_SESSION["page_data"] ?? [];
+    $events = $data["events"] ?? [];
 
 ?>
 
@@ -44,7 +45,7 @@
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
-<body class="w-full min-h-screen bg-background">
+<body class="w-full min-h-screen bg-background text-white">
     <?= HeaderComponent(); ?>
 
     <div class="flex flex-col md:flex-row w-full">
@@ -63,16 +64,19 @@
                         <div class="lg:col-span-1">
                             <?= FeaturedEventCard($featuredVieo, true)  ?>
                         </div>
+                    </div>
                 </section>
+
                 <section class="mb-12">
                     <div>
                         <h2 class="text-2xl font-bold text-white mb-2"><span class="text-purple-400">#</span> Eventos que irão acontecer 🔥</h2>
                         <p class="text-gray-400 text-sm mb-6">Confira os vídeo mais populares da nossa plataforma VHS</p>
                     </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <?= renderCards($events, 'event'); ?>   
-                        </div>
-                    </section>
+                        <?= renderCards($events); ?>   
+                    </div>
+                </section>
             </div>
         </main>
     </div>

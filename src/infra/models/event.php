@@ -40,5 +40,5 @@ class EventModel extends Model {
         SQL;
     
         return $this->database->query($sql, []);
-    }    
+    }
 }

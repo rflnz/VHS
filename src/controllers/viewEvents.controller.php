@@ -14,7 +14,9 @@ class ViewEventsController extends Controller {
     public function index() {
         try {
             $this->eventModel = $this->model("event");
-            $this->eventModel->getAllEvents();
+            $events = $this->eventModel->getAllEvents();
+            $this->view('events', [$events => 'events']);
+            
             return;
 
         } catch (\Throwable $exception) {
