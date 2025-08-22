@@ -2,6 +2,10 @@
 
 namespace Src\Views\Components\Cards;
 
+use DateTime as Date;
+
+require_once __DIR__ . "/../../../application/utils/purify/index.php";
+
 use function Src\Application\Utils\Purify\purifyProperty;
 use function Src\Application\Utils\Purify\purifyDateTime;
 
@@ -13,67 +17,43 @@ function renderCards(array $cards, ?string $type = null) {
     }
 }
 
-# -- Cards v3.0 (Interminado) -- #
+# --- Cards v3.0 --- #
 
 class Cards {
-    public string $type;
-    public string $url;
-    public string $thumbnail;
-    public string $avatar_url;
-    public string $username;
-    public string $title;
-    public string $description;
-    public string $created_at;
-    public string $event_date;
-
-    public int $views;
-    public int $duration;
-    public int $likes;
-    public int $comments;
-    
-    public function __construct(array $card, string $type) {
-        $this->type        = purifyProperty($type);
-        $this->url         = purifyProperty($card['url']);
-        $this->thumbnail   = purifyProperty($card['thumbnail']);
-        $this->username    = purifyProperty($card['username']);
-        $this->avatar_url  = purifyProperty($card['avatar_url']);
-        $this->title       = purifyProperty($card['title']);
-        $this->duration    = purifyProperty($card['duration']);
-        $this->views       = purifyProperty($card['views']);
-        $this->description = purifyProperty($card['description']);
-        $this->likes       = purifyProperty($card['likes']);
-        $this->comments    = purifyProperty($card['comments']);
-        $this->created_at  = purifyDateTime($card['created_at']);
-        $this->event_date  = purifyDateTime($card['planned_event']);
-    }
-
-    public static function Renderer(array $item, string $type) {
-        $cards = new Cards($item, $type);
-
-        switch ($cards->type) {
-            case 'videos'   : return $cards->Video();
-            case 'events'   : return $cards->Event();
-            case 'mychannel': return $cards->MyChannel();
-            case 'channels' : return $cards->Channels();
-            case 'fasts'    : return $cards->Fast();
+    public static function Renderer(array $card, string $type): string {
+        switch ($type) {
+            case 'videos'   : return self::Video($card);
+            case 'events'   : return self::Event($card);
+            case 'mychannel': return self::MyChannel($card);
+            case 'channels' : return self::Channels($card);
+            case 'fasts'    : return self::Fast($card);
             default         : return 'Esse card não existe...';
         }
     }
 
-    private function Video() {
+    private static function Video(array $card): string {
+        $url        = purifyProperty($card['url']        ?? '');
+        $thumbnail  = purifyProperty($card['thumbnail']  ?? '');
+        $username   = purifyProperty($card['username']   ?? '');
+        $avatar_url = purifyProperty($card['avatar_url'] ?? '');
+        $title      = purifyProperty($card['title']      ?? '');
+        $created_at = purifyDateTime($card['created_at'] ?? new Date());
+        $views      = purifyProperty($card['views']      ?? '0');
+        $duration   = purifyProperty($card['duration']   ?? '0');
+
         return <<<HTML
-            <a href='{$this->url}' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
+            <a href='$url' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
+                    <img src='$thumbnail' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black/75 px-2 py-1 rounded-md'>
-                        <p class='text-white text-caption 2xl:text-paragraph'>{$this->duration}</p>
+                        <p class='text-white text-caption 2xl:text-paragraph'>$duration</p>
                     </div>
                 </div>
 
                 <div class='p-4 text-white flex flex-col justify-between h-[50%]'>
                     <p class='truncate text-gray-400 text-caption 2xl:text-paragraph pr-16'>
-                        {$this->username}
+                        $username
                     </p>
 
                     <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
@@ -84,18 +64,18 @@ class Cards {
                             text-overflow: ellipsis;
                         '
                     >
-                        {$this->title}
+                        $title
                     </h3>
 
                     <p class='text-gray-400 text-caption 2xl:text-paragraph'>
-                        {$this->views} views • {$this->created_at}
+                        $views views • $created_at
                     </p>
                 </div>
 
                 <div class='absolute w-full h-full flex items-center justify-end p-5'>
                     <div class='relative w-16 h-16 2xl:w-20 2xl:h-20 flex items-center justify-center'>
                         <div class='absolute flex w-full h-full items-center justify-center rounded-full overflow-hidden bg-white/5'>
-                            <img src='{$this->avatar_url}' class='w-full h-full object-cover'>
+                            <img src='$avatar_url' class='w-full h-full object-cover'>
                         </div>
                     </div>
                 </div>
@@ -103,11 +83,19 @@ class Cards {
         HTML;
     }
 
-    private function Event() {
+    private static function Event(array $card): string {
+        $url         = purifyProperty($card['url']         ?? '');
+        $thumbnail   = purifyProperty($card['thumbnail']   ?? '');
+        $description = purifyProperty($card['description'] ?? '');
+        $username    = purifyProperty($card['username']    ?? '');
+        $title       = purifyProperty($card['title']       ?? '');
+        $views       = purifyProperty($card['views']       ?? '0');
+        $event_date  = purifyDateTime($card['event_date']  ?? new Date());
+
         return <<<HTML
-            <a href='{$this->url}' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
+            <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
+                    <img src='$thumbnail' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption 2xl:text-paragraph px-4 py-1 rounded-md'>
                         🔥  
@@ -115,7 +103,7 @@ class Cards {
                 </div>
 
                 <div class='p-3 text-white flex flex-col justify-between h-[50%]'>
-                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->description} | {$this->username}</p>
+                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>$description | $username</p>
 
                     <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
                         style='
@@ -125,10 +113,10 @@ class Cards {
                             text-overflow: ellipsis;
                         '
                     >
-                        {$this->title}
+                        $title
                     </h3>
 
-                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->views} views • {$this->event_date}</p>
+                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>$views views • $event_date</p>
                 </div>
             </a>
         HTML;

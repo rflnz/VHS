@@ -12,7 +12,7 @@ function purifyProperty($property) {
     return htmlspecialchars(strip_tags($property), ENT_QUOTES, 'UTF-8');
 }
 
-function purifyDateTime(DateTime $date) : string {
+function purifyDateTime($date) : string {
     if ($date instanceof \DateTime) {
         return $date->format('d/m/Y H:i:s');
     }
