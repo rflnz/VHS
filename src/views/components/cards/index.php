@@ -2,65 +2,62 @@
 
 namespace Src\Views\Components\Cards;
 
+use DateTime;
 use function Src\Application\Utils\Purify\purifyProperty;
+use function Src\Application\Utils\Purify\purifyDateTime;
 
-function renderCards(array $card, $type) {
-    foreach ($card as $item) {
-        if ($item['type_card'] === $type) {
-            echo Cards::Renderer($item);
+function renderCards(array $cards, ?string $type = null) {
+    foreach ($cards as $cardType => $item) {
+        if ($type === null || $cardType === $type) {
+            echo Cards::Renderer($item, $cardType);
         }
     }
 }
 
-# -- Cards v3.0 -- #
+# -- Cards v3.0 (Interminado) -- #
 
 class Cards {
-    public string $type_card;
+    public string $type;
     public string $url;
-    public string $thumbnail_url;
-    public string $username;
+    public string $thumbnail;
     public string $avatar_url;
+    public string $username;
     public string $title;
-    public string $duration;
-    public string $views;
-    public string $created_at;
     public string $description;
-    public string $likes;
-    public string $comments;
-    public string $planned_event;
+    public string $created_at;
+    public string $event_date;
 
-    public function __construct(array $card) {
-        $this->type_card = purifyProperty($card['type_card']);
-        $this->url = purifyProperty($card['url']);
-        $this->thumbnail_url = purifyProperty($card['thumbnail_url']);
-        $this->username = purifyProperty($card['username']);
-        $this->avatar_url = purifyProperty($card['avatar_url']);
-        $this->title = purifyProperty($card['title']);
-        $this->duration = purifyProperty($card['duration']);
-        $this->views = purifyProperty($card['views']);
-        $this->created_at = purifyProperty($card['created_at']);
+    public int $views;
+    public int $duration;
+    public int $likes;
+    public int $comments;
+    
+    public function __construct(array $card, string $type) {
+        $this->type        = purifyProperty($type);
+        $this->url         = purifyProperty($card['url']);
+        $this->thumbnail   = purifyProperty($card['thumbnail']);
+        $this->username    = purifyProperty($card['username']);
+        $this->avatar_url  = purifyProperty($card['avatar_url']);
+        $this->title       = purifyProperty($card['title']);
+        $this->duration    = purifyProperty($card['duration']);
+        $this->views       = purifyProperty($card['views']);
         $this->description = purifyProperty($card['description']);
-        $this->likes = purifyProperty($card['likes']);
-        $this->comments = purifyProperty($card['comments']);
-        $this->planned_event = purifyProperty($card['planned_event']);
+        $this->likes       = purifyProperty($card['likes']);
+        $this->comments    = purifyProperty($card['comments']);
+        $this->created_at  = purifyDateTime($card['created_at']);
+        $this->event_date  = purifyDateTime($card['planned_event']);
     }
 
-    public static function Renderer(array $item) {
-        $card = new Cards($item);
+    public static function Renderer(array $item, string $type) {
+        $cards = new Cards($item, $type);
 
-        switch ($card->type_card) {
-            case 'video':
-                return $card->Video();
-            case 'event':
-                return $card->Event();
-            case 'channel':
-                return $card->MyChannel();
-            case 'channels':
-                return $card->Channels();
-            case 'fast':
-                return $card->Fast();
-            default:
-                return '';
+        switch ($cards->type) {
+            case 'videos'   : return $cards->Video();
+            case 'events'   : return $cards->Event();
+            case 'mychannel': return $cards->MyChannel();
+            case 'channels' : return $cards->Channels();
+            case 'fasts'    : return $cards->Fast();
+            default         : return 'Esse card não existe...';
         }
     }
 
@@ -68,7 +65,7 @@ class Cards {
         return <<<HTML
             <a href='{$this->url}' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
+                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black/75 px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>{$this->duration}</p>
@@ -111,7 +108,7 @@ class Cards {
         return <<<HTML
             <a href='{$this->url}' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
+                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption 2xl:text-paragraph px-4 py-1 rounded-md'>
                         🔥  
@@ -119,13 +116,16 @@ class Cards {
                 </div>
 
                 <div class='p-3 text-white flex flex-col justify-between h-[50%]'>
-                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->maked_for} | {$this->description}</p>
+                    <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->description} | {$this->username}</p>
 
-                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3' style='
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        text-overflow: ellipsis;'>
+                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
+                        style='
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            text-overflow: ellipsis;
+                        '
+                    >
                         {$this->title}
                     </h3>
 
@@ -139,7 +139,7 @@ class Cards {
         return <<<HTML
             <a href='{$this->url}' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
+                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
                     
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 text-white text-caption px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>{$this->duration}</p>
@@ -149,11 +149,14 @@ class Cards {
                 <div class='p-4 text-white flex flex-col justify-between flex gap-1'>
                     <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->created_at}</p>
 
-                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3' style='
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        text-overflow: ellipsis;'>
+                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
+                        style='
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            text-overflow: ellipsis;
+                        '
+                    >
                         {$this->title}
                     </h3>
                     
@@ -162,6 +165,7 @@ class Cards {
                             <div>
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
                             </div>
+
                             <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->comments}</p>
                         </div>
 
@@ -169,6 +173,7 @@ class Cards {
                             <div>
                                 <img src='/VHS/public/icons/star-card.svg' class='w-full h-full'>
                             </div>
+
                             <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->likes}</p>
                         </div>
 
@@ -176,6 +181,7 @@ class Cards {
                             <div>
                                 <img src='/VHS/public/icons/views-card.svg' class='w-full h-full'>
                             </div>
+
                             <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->views}</p>
                         </div>
                     </div>
@@ -188,7 +194,7 @@ class Cards {
         return <<<HTML
             <a href='{$this->url}' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
                 <div class='relative w-full h-[50%]'>
-                    <img src='{$this->thumbnail_url}' class='w-full h-full object-cover'>
+                    <img src='{$this->thumbnail}' class='w-full h-full object-cover'>
 
                     <div class='absolute top-3 right-3 bg-black bg-opacity-70 px-2 py-1 rounded-md'>
                         <p class='text-white text-caption 2xl:text-paragraph'>{$this->duration}</p>
@@ -198,11 +204,14 @@ class Cards {
                 <div class='p-4 text-white flex flex-col justify-between h-[50%]'>
                     <p class='text-gray-400 text-caption 2xl:text-paragraph'>{$this->username}</p>
 
-                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3' style='
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        text-overflow: ellipsis;'>
+                    <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
+                        style='
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            text-overflow: ellipsis;
+                        '
+                    >
                         {$this->title}
                     </h3>
 
@@ -214,20 +223,20 @@ class Cards {
 
     private function Fast() {
         return <<<HTML
-            <div class='cursor-pointer h-[35rem] relative flex items-center justify-center current_fast rounded-2xl'>
-                <img src='{$this->thumbnail_url}' class='w-full object-cover h-full absolute rounded-2xl' alt='Imagem do card'>
+            <a href='{$this->url}' class='cursor-pointer h-[35rem] relative flex items-center justify-center current_fast rounded-2xl'>
+                <img src='{$this->thumbnail}' class='w-full object-cover h-full absolute rounded-2xl' alt='Imagem do card'>
 
                 <div class='block w-full bottom-12 absolute px-1'>
                     <h2 class='text-white ml-3.5'>{$this-> title}</h2>
 
                     <div class='mt-2 w-full flex gap-4 px-4 absolute'>
                         <div class='flex items-center gap-2.5'>
-                            <img src='/VHS/public/icons/fastIcon/Vector.svg' alt='coração'>
+                            <img src='/VHS/public/icons/fastIcon/Vector.svg'>
                             <p class='text-sm text-white'>{$this->likes}</p>
                         </div>
 
                         <div class='flex items-center gap-2.5'>
-                            <img src='/VHS/public/icons/fastIcon/eyeIcon.svg' alt='visualizações'>
+                            <img src='/VHS/public/icons/fastIcon/eyeIcon.svg'>
                             <p class='text-sm text-white'>{$this->views}</p>
                         </div>
                     </div>
