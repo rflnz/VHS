@@ -2,7 +2,6 @@
 
 namespace Src\Views\Components\Cards;
 
-use DateTime;
 use function Src\Application\Utils\Purify\purifyProperty;
 use function Src\Application\Utils\Purify\purifyDateTime;
 

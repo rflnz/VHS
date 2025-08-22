@@ -1,4 +1,5 @@
 <?php
+
 namespace Src\Views\Components\Cards;
 
 require_once __DIR__ . "/formatCard.php";
@@ -14,6 +15,7 @@ use function Src\Views\Components\Utils\formatViews;
  * @param int $views - Quantidade de visualizações do video.
  * @return string - HTML do card do video (studio).
 **/
+
 function StudioVideoComponent(string $id, string $title, string $thumbnail_url, int $views) {
     $id = purifyProperty($id);
     $title = purifyProperty($title);
