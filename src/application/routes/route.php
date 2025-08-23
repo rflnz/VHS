@@ -31,7 +31,6 @@
 // use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 // use Src\Controllers\SignInViewController;
 
-
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
 
