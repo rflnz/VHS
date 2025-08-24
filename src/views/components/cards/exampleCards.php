@@ -12,17 +12,6 @@ $cards = [
         "created_at" => "há 2 dias"
     ],
 
-    "videos" => [
-        "url" => "#",
-        "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
-        "duration" => "7 min",
-        "username" => "Rafael Germinari",
-        "thumbnail" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
-        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
-        "views" => "53k",
-        "created_at" => "há 2 dias"
-    ],
-    
     "events" => [
         "url" => "#",
         "title" => "Como aprender programação do zero e se tornar um excelente desenvolvedor full stack",
