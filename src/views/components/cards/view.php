@@ -3,7 +3,7 @@
 require_once __DIR__ . "/exampleCards.php";
 require_once __DIR__ . "/index.php";
 
-use function Src\Views\Components\Cards\renderCards;
+use Src\Views\Components\Cards\View;
 
 ?>
 
@@ -12,7 +12,7 @@ use function Src\Views\Components\Cards\renderCards;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VHS - Evento</title>
+    <title>View Cards</title>
 
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
     <script type="module" src="/VHS/src/styles/tailwindglobal.js"></script>
@@ -21,7 +21,7 @@ use function Src\Views\Components\Cards\renderCards;
 
 <body class='flex flex-row flex-wrap gap-4'>
 
-    <?php echo renderCards($cards, 'videos'); ?>
+    <?= View::viewCards($cards); ?>
 
 </body>
 </html>

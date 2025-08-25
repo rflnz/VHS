@@ -3,17 +3,33 @@
 namespace Src\Views\Components\Cards;
 
 require_once __DIR__ . "/../../../application/utils/purify/index.php";
-
 use function Src\Application\Utils\Purify\purifyProperty;
-use function Src\Application\Utils\Purify\purifyDateTime;
 
-function renderCards(array $cards, string $type) {
-    foreach ($cards as $card) {
-        echo Cards::Renderer($card, $type);
+class View {
+    public function viewCards(array $cards, ?string $type = null): string {
+        $html = '';
+
+        if ($type) {
+            foreach ($cards as $card) {
+                if ($card['type'] === $type) {
+                    $html .= Cards::Renderer($card, $type);
+                }
+            }
+
+            if ($html === '') {
+                $html = "<h1 class='text-white'>Esse card não existe...</h1>";
+            }
+        }
+        
+        else {
+            foreach ($cards as $card) {
+                $html .= Cards::Renderer($card, $card['type']);
+            }
+        }
+
+        return $html;
     }
 }
-
-# --- Cards v3.0 --- #
 
 class Cards {
     public static function Renderer(array $card, string $type): string {
@@ -33,7 +49,7 @@ class Cards {
         $username   = purifyProperty($card['username']);
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
-        $created_at = purifyDateTime($card['created_at']);
+        $created_at = purifyProperty($card['created_at']);
         $views      = purifyProperty($card['views']);
         $duration   = purifyProperty($card['duration']);
 
@@ -69,7 +85,7 @@ class Cards {
                 </div>
 
                 <div class='absolute w-full h-full flex items-center justify-end p-5'>
-                    <div class='relative w-16 h-16 2xl:w-20 2xl:h-20 flex items-center justify-center'>
+                    <div class='relative w-20 h-20 2xl:w-20 2xl:h-20 flex items-center justify-center'>
                         <div class='absolute flex w-full h-full items-center justify-center rounded-full overflow-hidden bg-white/5'>
                             <img src='$avatar_url' class='w-full h-full object-cover'>
                         </div>
@@ -86,7 +102,7 @@ class Cards {
         $username    = purifyProperty($card['username']);
         $title       = purifyProperty($card['title']);
         $views       = purifyProperty($card['views']);
-        $event_date  = purifyDateTime($card['event_date']);
+        $event_date  = purifyProperty($card['event_date']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
@@ -125,7 +141,7 @@ class Cards {
         $comments   = purifyProperty($card['comments']);
         $likes      = purifyProperty($card['likes']);
         $views      = purifyProperty($card['views']);
-        $created_at = purifyDateTime($card['created_at']);
+        $created_at = purifyProperty($card['created_at']);
         $duration   = purifyProperty($card['duration']);
 
         return <<<HTML
@@ -138,7 +154,7 @@ class Cards {
                     </div>
                 </div>
 
-                <div class='p-4 text-white flex flex-col justify-between flex gap-1'>
+                <div class='p-4 text-white flex flex-col justify-between flex gap-2 h-[50%]'>
                     <p class='text-gray-400 text-caption 2xl:text-paragraph'>$created_at</p>
 
                     <h3 class='text-paragraph 2xl:text-subtitle leading-tight break-words overflow-hidden line-clamp-3'
@@ -152,7 +168,7 @@ class Cards {
                         $title
                     </h3>
                     
-                    <div class='flex justify-between mt-4'>
+                    <div class='flex justify-between'>
                         <div class='flex gap-2 items-center'>
                             <div>
                                 <img src='/VHS/public/icons/comments-card.svg' class='w-full h-full'>
@@ -189,7 +205,7 @@ class Cards {
         $title     = purifyProperty($card['title']);
         $duration  = purifyProperty($card['duration']);
         $views     = purifyProperty($card['views']);
-        $created_at = purifyDateTime($card['created_at']);
+        $created_at = purifyProperty($card['created_at']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
