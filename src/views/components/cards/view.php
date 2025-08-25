@@ -21,7 +21,7 @@ use function Src\Views\Components\Cards\viewCards;
 
 <body class='flex flex-row flex-wrap gap-4'>
 
-    <?= viewCards($cards); ?>
+    <?= viewCards($cards, "videos"); ?>
 
 </body>
 </html>

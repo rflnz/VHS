@@ -12,6 +12,19 @@ $cards = [
         "views" => 53000,
         "created_at" => "2025-08-25 17:21:00"
     ],
+
+    [
+       "type" => "videos",
+        "url" => "#",
+        "title" => "Como purificar Kayke - feat @rezendeevil",
+        "duration" => 59,
+        "username" => "Rafael Montealvão",
+        "thumbnail" => "https://t.ctcdn.com.br/69rFkwz-cdviPGZn2p_l6rJH0UA=/1200x675/smart/i533291.png",
+        "avatar_url" => "https://senachub.ms.senac.br/hubinnovation/uploads/fotos/6706850e20f59.jpg",
+        "views" => 500,
+        "created_at" => "2025-08-25 17:21:00"
+    ],
+
     [
         "type" => "events",
         "url" => "#",
@@ -24,6 +37,7 @@ $cards = [
         "description" => "Gratuito",
         "event_date" => "2025-09-08 17:15:00"
     ],
+
     [
         "type" => "mychannel",
         "url" => "#",
@@ -37,6 +51,7 @@ $cards = [
         "likes" => 12000,
         "views" => 540000
     ],
+
     [
         "type" => "channels",
         "url" => "#",
@@ -47,6 +62,7 @@ $cards = [
         "views" => 1000000,
         "created_at" => "2025-10-08 19:45:00",
     ],
+    
     [
         "type" => "fasts",
         "url" => "#",
