@@ -3,7 +3,7 @@
 require_once __DIR__ . "/exampleCards.php";
 require_once __DIR__ . "/index.php";
 
-use Src\Views\Components\Cards\View;
+use function Src\Views\Components\Cards\viewCards;
 
 ?>
 
@@ -21,7 +21,7 @@ use Src\Views\Components\Cards\View;
 
 <body class='flex flex-row flex-wrap gap-4'>
 
-    <?= View::viewCards($cards); ?>
+    <?= viewCards($cards); ?>
 
 </body>
 </html>

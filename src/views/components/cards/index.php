@@ -5,30 +5,28 @@ namespace Src\Views\Components\Cards;
 require_once __DIR__ . "/../../../application/utils/purify/index.php";
 use function Src\Application\Utils\Purify\purifyProperty;
 
-class View {
-    public function viewCards(array $cards, ?string $type = null): string {
-        $html = '';
+function viewCards(array $cards, ?string $type = null): string {
+    $html = '';
 
-        if ($type) {
-            foreach ($cards as $card) {
-                if ($card['type'] === $type) {
-                    $html .= Cards::Renderer($card, $type);
-                }
-            }
-
-            if ($html === '') {
-                $html = "<h1 class='text-white'>Esse card não existe...</h1>";
-            }
-        }
-        
-        else {
-            foreach ($cards as $card) {
-                $html .= Cards::Renderer($card, $card['type']);
+    if ($type) {
+        foreach ($cards as $card) {
+            if ($card['type'] === $type) {
+                $html .= Cards::Renderer($card, $type);
             }
         }
 
-        return $html;
+        if ($html === '') {
+            $html = "<h1 class='text-white'>Esse card não existe...</h1>";
+        }
     }
+    
+    else {
+        foreach ($cards as $card) {
+            $html .= Cards::Renderer($card, $card['type']);
+        }
+    }
+
+    return $html;
 }
 
 class Cards {
