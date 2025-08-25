@@ -3,7 +3,12 @@
 namespace Src\Views\Components\Cards;
 
 require_once __DIR__ . "/../../../application/utils/purify/index.php";
+
 use function Src\Application\Utils\Purify\purifyProperty;
+use function Src\Application\Utils\Purify\purifyNumbers;
+use function Src\Application\Utils\Purify\purifyDuration;
+use function Src\Application\Utils\Purify\purifyCreatedAt;
+use function Src\Application\Utils\Purify\purifyDateTime;
 
 function viewCards(array $cards, ?string $type = null): string {
     $html = '';
@@ -29,6 +34,8 @@ function viewCards(array $cards, ?string $type = null): string {
     return $html;
 }
 
+# ----- #
+
 class Cards {
     public static function Renderer(array $card, string $type): string {
         switch ($type) {
@@ -47,9 +54,9 @@ class Cards {
         $username   = purifyProperty($card['username']);
         $avatar_url = purifyProperty($card['avatar_url']);
         $title      = purifyProperty($card['title']);
-        $created_at = purifyProperty($card['created_at']);
-        $views      = purifyProperty($card['views']);
-        $duration   = purifyProperty($card['duration']);
+        $views      = purifyNumbers($card['views']);
+        $duration   = purifyDuration($card['duration']);
+        $created_at = purifyCreatedAt($card['created_at']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer relative max-w-[340px] h-[340px] bg-gray600 rounded-3xl overflow-hidden shadow-lg transition-all duration-300'>
@@ -99,8 +106,8 @@ class Cards {
         $description = purifyProperty($card['description']);
         $username    = purifyProperty($card['username']);
         $title       = purifyProperty($card['title']);
-        $views       = purifyProperty($card['views']);
-        $event_date  = purifyProperty($card['event_date']);
+        $views       = purifyNumbers($card['views']);
+        $event_date  = purifyDateTime($card['event_date']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
@@ -136,11 +143,11 @@ class Cards {
         $url        = purifyProperty($card['url']);
         $thumbnail  = purifyProperty($card['thumbnail']);
         $title      = purifyProperty($card['title']);
-        $comments   = purifyProperty($card['comments']);
-        $likes      = purifyProperty($card['likes']);
-        $views      = purifyProperty($card['views']);
-        $created_at = purifyProperty($card['created_at']);
-        $duration   = purifyProperty($card['duration']);
+        $comments   = purifyNumbers($card['comments']);
+        $likes      = purifyNumbers($card['likes']);
+        $views      = purifyNumbers($card['views']);
+        $created_at = purifyCreatedAt($card['created_at']);
+        $duration   = purifyDuration($card['duration']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
@@ -201,9 +208,9 @@ class Cards {
         $thumbnail = purifyProperty($card['thumbnail']);
         $username  = purifyProperty($card['username']);
         $title     = purifyProperty($card['title']);
-        $duration  = purifyProperty($card['duration']);
-        $views     = purifyProperty($card['views']);
-        $created_at = purifyProperty($card['created_at']);
+        $duration  = purifyDuration($card['duration']);
+        $views     = purifyNumbers($card['views']);
+        $created_at = purifyCreatedAt($card['created_at']);
 
         return <<<HTML
             <a href='$url' class='card flex flex-col cursor-pointer max-w-[340px] h-[340px] bg-[#1B1B1B] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300'>
@@ -239,8 +246,8 @@ class Cards {
         $url       = purifyProperty($card['url']);
         $thumbnail = purifyProperty($card['thumbnail']);
         $title     = purifyProperty($card['title']);
-        $likes     = purifyProperty($card['likes']);
-        $views     = purifyProperty($card['views']);
+        $likes     = purifyNumbers($card['likes']);
+        $views     = purifyNumbers($card['views']);
 
         return <<<HTML
             <a href='$url' class='current_fast cursor-pointer flex-shrink-0 w-[340px] h-[35rem] relative flex items-center justify-center rounded-3xl overflow-hidden'>
