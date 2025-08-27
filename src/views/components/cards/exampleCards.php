@@ -1,5 +1,7 @@
 <?php
 
+# Arquivo descartável
+
 $cards = [
     [
         "type" => "videos",
@@ -66,7 +68,7 @@ $cards = [
     [
         "type" => "fasts",
         "url" => "#",
-        "thumbnail" => "https://placehold.co/340x600",
+        "thumbnail" => "https://i.pinimg.com/236x/13/3b/65/133b656544be255b6642050e0e0e91a1.jpg",
         "title" => "Shorts de programação em 1 minuto",
         "likes" => 3400,
         "views" => 15000
