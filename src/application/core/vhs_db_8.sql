@@ -12,14 +12,52 @@ CREATE TABLE users (
     date_birthday DATE NOT NULL,
     bio VARCHAR(255) DEFAULT NULL,
     avatar_url TEXT DEFAULT NULL,
-    banner_url TEXT DEFAULT NULL,
-    social_medias TEXT DEFAULT NULL, -- PADRÃO(CRIADOR): https://instagram.com, https://facebook.com.br
     email_already_sent BOOLEAN DEFAULT FALSE,
     verified_email BOOLEAN DEFAULT FALSE,
     token VARCHAR(46) NOT NULL,
     role ENUM('USER', 'CREATOR', 'ADMIN') NOT NULL DEFAULT 'USER',
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP()
+);
+
+CREATE TABLE videos (
+    id VARCHAR(23) PRIMARY KEY,
+    url TEXT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT DEFAULT NULL,
+    author_id VARCHAR(23) NOT NULL,
+    category_id VARCHAR(23) NOT NULL,
+    duration INT,
+    views INT,
+    type ENUM('VIDEO', 'FAST') NOT NULL,
+    thumbnail_url TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+
+    FOREIGN KEY (author_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+CREATE TABLE events (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	author_id VARCHAR(23) NOT NULL,
+	title TEXT NOT NULL,
+	description MEDIUMTEXT DEFAULT NULL,
+	thumbnail_url TEXT NOT NULL,
+	views INT NOT NULL DEFAULT 0,
+	event_date DATETIME NOT NULL,
+
+	FOREIGN KEY (author_id) REFERENCES users(id)
+);
+
+CREATE TABLE channels (
+	id VARCHAR(23) PRIMARY KEY,
+	subscribers int,
+	banner_url TEXT DEFAULT NULL,
+	social_medias TEXT DEFAULT NULL, -- PADRÃO(CRIADOR): https://instagram.com, https://facebook.com
+	user_id VARCHAR(23) NOT NULL,
+
+	FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 CREATE TABLE categories (
@@ -34,38 +72,6 @@ CREATE TABLE users_category (
 
     FOREIGN KEY (category_id) REFERENCES categories(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-CREATE TABLE videos (
-    id VARCHAR(23) PRIMARY KEY,
-    url TEXT NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    description TEXT DEFAULT NULL,
-    author_id VARCHAR(23) NOT NULL,
-    category_id VARCHAR(23) NOT NULL,
-    duration INT NOT NULL,
-    target_audience VARCHAR(100) NOT NULL,
-    views INT NOT NULL,
-    type ENUM('VIDEO', 'FAST') NOT NULL,
-    thumbnail_url TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-    update_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
-
-    FOREIGN KEY (author_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-);
-
-CREATE TABLE events (
-	id INT AUTO_INCREMENT PRIMARY KEY,
-    url TEXT NOT NULL,
-	user_id VARCHAR(23) NOT NULL,
-	title TEXT NOT NULL,
-	description MEDIUMTEXT DEFAULT NULL,
-	thumbnail_url TEXT NOT NULL,
-	views INT NOT NULL DEFAULT 0,
-	planned_events DATETIME NOT NULL,
-
-	FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE comments (
@@ -100,6 +106,28 @@ CREATE TABLE users_history (
 
     FOREIGN KEY (video_id) REFERENCES videos(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+-- T E S T I N G --
+
+INSERT INTO users (
+    id,
+    email,
+    password,
+    name,
+    username,
+    date_birthday,
+    token,
+    role
+) VALUES (
+    'usr_001',
+    'teste@example.com',
+    'senha123', -- Só para teste, em produção use hash!
+    'Usuário Teste',
+    'usuarioteste',
+    '1990-01-01',
+    'token12345678901234567890123456789012345612', -- 46 caracteres
+    'CREATOR'
 );
 
 -- I N D E X E S --
