@@ -1,56 +1,59 @@
 <?php
-require "../../../../../components/utils/buttonComponent.php";
-require "../../../../../components/utils/inputComponent.php";
-require "../../../../../components/utils/textareaComponent.php";
-require "../../../../../components/header/headerComponent.php";
-require "../../../../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../../../../components/utils/Title_and_buttons.php";
-require "../../../../../components/utils/footer.php";
 
-use function Src\Views\Components\Utils\ButtonComponent;
-use function Src\Views\Components\Utils\InputComponent;
-use function Src\Views\Components\Utils\TextareaComponent;
-use function Src\views\components\header\HeaderComponent;
-use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-use function src\views\components\utils\Title_and_buttons;
-use function src\views\components\utils\Footer;
+    require_once "../../../../../components/utils/buttonComponent.php";
+    require_once "../../../../../components/utils/inputComponent.php";
+    require_once "../../../../../components/utils/textareaComponent.php";
+    // require_once __DIR__ . "/../../../../../components/header/headerComponent.php";
+    require_once "../../../../../components/studioSideMenu/studioSideMenu.php";
+    require_once "../../../../../components/utils/Title_and_buttons.php";
+    require_once "../../../../../components/utils/footer.php";
 
-$botoes = [
-    ['texto' => 'Edição', 'link' => ''],
-    ['texto' => 'Comentários', 'link' => '../components/teste.php'],
-    ['texto' => 'Analytics', 'link' => '']
-];
+    use function Src\Views\Components\StudioSideMenu;
+    // use function Src\Views\Components\HeaderComponent;
+    use function Src\Views\Components\Utils\ButtonComponent;
+    use function Src\Views\Components\Utils\InputComponent;
+    use function Src\Views\Components\Utils\TextareaComponent;
+    use function Src\Views\Components\Utils\Footer;
 
-$conteudos = []
+    $botoes = [
+        ['texto' => 'Edição', 'link' => ''],
+        ['texto' => 'Comentários', 'link' => '../components/teste.php'],
+        ['texto' => 'Analytics', 'link' => '']
+    ];
+
+    $conteudos = []
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<!-- H T M L -->
 
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VHS - Estudio</title>
+    <title>Studio - Criar Evento</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/VHS/src/styles/tailwindglobal.js"></script>
     <link rel="stylesheet" href="/VHS/src/styles/global.css">
 </head>
 
-<body class="">
-
+<body>
     <div>
-        <?= HeaderComponent() ?>
+        
     </div>
-    <div class="flex">
 
+    <div class="flex">
         <div>
-            <?= StudioSideMenuComponent() ?>
+            <?= StudioSideMenu() ?>
         </div>
 
         <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
-            <div class="text-white flex flex-col gap-2">
+            <form class="text-white flex flex-col gap-2">
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
+                
                 <div class="mt-2 flex gap-2 w-96">
                     <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/video"); ?>
                     <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
@@ -58,22 +61,23 @@ $conteudos = []
                 </div>
 
                 <div id="URL">
-                    <h1 class="text-subtitle text-white font-semibold mt-4">URL</h1>
-                    <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", placeholder: "https://youtube.com") ?>
+                    <h1 class="text-subtitle text-white font-semibold mt-4">Link</h1>
+                    <p class="text-paragraph text-gray-400 p-0 mb-2">Digite o link do seu evento</p>
+                    <?= InputComponent(type: "text", name: "event_url", placeholder: "https://youtube.com") ?>
                 </div>
+
                 <div id="date-event">
                     <h1 class="text-subtitle text-white font-semibold mt-4">Data do evento</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", placeholder: "23/04/2025 ás 15h30") ?>
+                    <?= InputComponent(type: "text", name: "event_date", placeholder: "23/04/2025 ás 15h30") ?>
                 </div>
 
                 <div id="thumb">
                     <h1 class="text-subtitle text-white font-semibold mt-4">Thumbnail</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
                 </div>
-                <div class="mt-2 bg-background w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
 
+                <div class="mt-2 bg-background w-full h-full md:h-[400px] border-2 rounded-xl border-solid flex items-center justify-center relative overflow-hidden -mt-8 flex-wrap">
                     <video id="videoPreview" class="hidden w-full h-full object-cover rounded-lg absolute" controls></video>
 
                     <div id="uploadArea" class="flex flex-col items-center justify-center w-full h-full">
@@ -89,44 +93,46 @@ $conteudos = []
                         </label>
                     </div>
                 </div>
+
                 <div id="Title">
                     <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
+                    <?= InputComponent(type: "text", name: "event_titulo", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
                 </div>
+
                 <div id="Description">
                     <h1 class="text-3xl text-white font-semibold mt-4">Descrição</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl.
                     </p>
+
                     <div class="">
                         <?= TextareaComponent(
                             type: "text",
+                            name: "event_description",
                             placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
-                            height: "96",
+                            height: 96,
                             multiline: true
                         ) ?>
                     </div>
                 </div>
+
                 <div id="Public">
                     <h1 class="text-3xl text-white font-semibold mt-4">Público</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
-                </div>
+                    <?= InputComponent(type: "text", name: "event_publico", placeholder: "Estudante de Nível Técnico de tecnologia, Entusiasta em foguetes") ?>
+                </div> 
 
                 <div class="flex flex-col sm:flex-row justify-center items-end gap-10 my-6">
-                    <?= ButtonComponent(text: "Cancelar", variant: "outline", id: "cancel-button", width: 27.5) ?>
-                    <?= ButtonComponent(text: "Salvar Alterações", variant: "default", id: "publish-button", width: 27.5) ?>
+                    <?= ButtonComponent(text: "Cancelar", variant: "outline", type: "",  className: "", id: "cancel-button", isActive: false, width: 23.875, height: 3.125) ?>
+                    <?= ButtonComponent(text: "Salvar Alterações", variant: "default", type: "",  className: "", id: "publish-button", isActive: false, width: 23.875, height: 3.125) ?>
                 </div>
-
-            </div>
+            </form>
         </div>
     </div>
 
-    <footer class=""> <?= Footer() ?> </footer>
+    <footer class=""><?= Footer() ?></footer>
 
     <script src="./videofast.js"></script>
-
 </body>
-
 </html>

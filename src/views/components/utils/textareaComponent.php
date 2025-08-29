@@ -2,7 +2,8 @@
 namespace Src\Views\Components\Utils;
 
 function TextareaComponent(
-    string $type = "text", 
+    string $type = "text",
+    string $name = "", 
     string $placeholder, 
     string $icon = null, 
     string $label = null, 
@@ -16,6 +17,7 @@ function TextareaComponent(
     bool $multiline = false
 ) {
     $type = htmlspecialchars($type, ENT_QUOTES, 'UTF-8');
+    $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
     $placeholder = htmlspecialchars($placeholder, ENT_QUOTES, 'UTF-8');
     $icon = $icon ? "<img src='" . htmlspecialchars($icon, ENT_QUOTES, 'UTF-8') . "' class='absolute $iconPosition w-5 h-5 fill-blue-500'>" : "";
     
@@ -45,7 +47,7 @@ function TextareaComponent(
 
     
     $inputElement = $multiline
-        ? "<textarea placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'></textarea>"
+        ? "<textarea placeholder='$placeholder' name='$name' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'></textarea>"
         : "<input type='$type' placeholder='$placeholder' class='$input_style' onfocus='this.placeholder=\"\"' onblur='this.placeholder=\"$placeholder\"'>";
 
     return "
