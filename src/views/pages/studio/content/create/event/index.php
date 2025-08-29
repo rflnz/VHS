@@ -55,9 +55,9 @@
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 
                 <div class="mt-2 flex gap-2 w-96">
-                    <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/video"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "",  10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
-                    <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/event"); ?>
+                    <?php echo ButtonComponent("Vídeo", "studio", "", "", false, 10.675, 2.5, "", "/create/video"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "", "", false,  10.675, 2.5, "", "/create/fast"); ?>
+                    <?php echo ButtonComponent("Eventos", "studio", "", "", false, 10.675, 2.5, "", "/create/event"); ?>
                 </div>
 
                 <div id="URL">
