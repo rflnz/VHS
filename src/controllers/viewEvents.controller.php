@@ -15,7 +15,7 @@ class ViewEventsController extends Controller {
         try {
             $this->eventModel = $this->model("event");
             $events = $this->eventModel->getAllEvents();
-            $this->view('events', [$events => 'events']);
+            $this->view('/studio/content/create/event/index');
             
             return;
 

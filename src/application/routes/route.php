@@ -43,7 +43,7 @@ $router = new Router();
 // $router->post('/api/v1/auth/signin', SignInController::class);
 
 # Views Routes
-   $router->get("/api/v1/view/events", ViewEventsController::class);
+   $router->get("/create/event", ViewEventsController::class);
 // $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
 // $router->get('/auth/signin', SignInViewController::class, RedirectUserLoggedMiddleware::class);
 // $router->get("/auth/signup", SignUpViewController::class, RedirectUserLoggedMiddleware::class);

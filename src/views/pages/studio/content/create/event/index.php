@@ -1,15 +1,15 @@
 <?php
 
-    require_once "../../../../../components/utils/buttonComponent.php";
-    require_once "../../../../../components/utils/inputComponent.php";
-    require_once "../../../../../components/utils/textareaComponent.php";
-    // require_once __DIR__ . "/../../../../../components/header/headerComponent.php";
-    require_once "../../../../../components/studioSideMenu/studioSideMenu.php";
-    require_once "../../../../../components/utils/Title_and_buttons.php";
-    require_once "../../../../../components/utils/footer.php";
+    require_once __DIR__ . "../../../../../../components/utils/buttonComponent.php";
+    require_once __DIR__ . "../../../../../../components/utils/inputComponent.php";
+    require_once __DIR__ . "../../../../../../components/utils/textareaComponent.php";
+    require_once __DIR__ . "../../../../../../components/header/headerComponent.php";
+    require_once __DIR__ . "../../../../../../components/studioSideMenu/studioSideMenu.php";
+    require_once __DIR__ . "../../../../../../components/utils/Title_and_buttons.php";
+    require_once __DIR__ . "../../../../../../components/utils/footer.php";
 
     use function Src\Views\Components\StudioSideMenu;
-    // use function Src\Views\Components\HeaderComponent;
+    use function Src\Views\Components\HeaderComponent;
     use function Src\Views\Components\Utils\ButtonComponent;
     use function Src\Views\Components\Utils\InputComponent;
     use function Src\Views\Components\Utils\TextareaComponent;
@@ -56,7 +56,7 @@
                 
                 <div class="mt-2 flex gap-2 w-96">
                     <?php echo ButtonComponent("Vídeo", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/video"); ?>
-                    <?php echo ButtonComponent("Fast", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
+                    <?php echo ButtonComponent("Fast", "studio", "",  10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/fast"); ?>
                     <?php echo ButtonComponent("Eventos", "studio", "", 10.675, 2.5, "", "/VHS/src/views/pages/studio/content/create/event"); ?>
                 </div>
 
