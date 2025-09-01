@@ -54,11 +54,15 @@ function toggleSidebar(state) {
         if (isExpanded) {
             text.style.opacity = "1";
             text.style.transform = "translateX(0)";
+            text.style.display = "block";
             return;
         }
 
         text.style.opacity = "0";
         text.style.transform = "translateX(-10px)";
+        setTimeout(() => {
+            text.style.display = "none";
+        }, 300);
     });
 }
 
