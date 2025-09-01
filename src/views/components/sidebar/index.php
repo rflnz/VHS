@@ -6,12 +6,12 @@ function SidebarComponent() {
     $menu = [
         "home" => [
             [
-                "icon" => "/VHS/public/icons/Home.svg",
+                "icon" => "/VHS/public/icons/home.svg",
                 "text" => "Início",
                 "link" => "/VHS/src/views/pages/home"
             ],
             [
-                "icon" => "/VHS/public/icons/Fast.svg",
+                "icon" => "/VHS/public/icons/fast.svg",
                 "text" => "Fast",
                 "link" => "/VHS/src/views/pages/home/fast"
             ],
@@ -26,6 +26,7 @@ function SidebarComponent() {
                 "link" => "/VHS/src/views/pages/home/history"
             ]
         ],
+
         "categories" => [
             "tech" => [
                 "icon" => "/VHS/public/icons/cpu.svg",
@@ -33,17 +34,17 @@ function SidebarComponent() {
                 "link" => "/VHS/src/views/pages/home/categories?category=tecnologia"
             ],
             "health" => [
-                "icon" => "/VHS/public/icons/Saude.svg",
+                "icon" => "/VHS/public/icons/saude.svg",
                 "text" => "Saúde",
                 "link" => "/VHS/src/views/pages/home/categories?category=saude"
             ],
             "fashion" => [
-                "icon" => "/VHS/public/icons/Moda.svg",
+                "icon" => "/VHS/public/icons/moda.svg",
                 "text" => "Moda",
                 "link" => "/VHS/src/views/pages/home/categories?category=moda"
             ],
             "aesthetics" => [
-                "icon" => "/VHS/public/icons/Estetica.svg",
+                "icon" => "/VHS/public/icons/estetica.svg",
                 "text" => "Estética",
                 "link" => "/VHS/src/views/pages/home/categories?category=estetica"
             ]
@@ -95,8 +96,6 @@ function SidebarComponent() {
                 $htmlCategories
             </ul>
 
-            <hr class="my-4 border-zinc-700 separator">
-            
             <script src="/VHS/src/views/components/sidebar/script.js"></script>
         </aside>
     HTML;
