@@ -3,8 +3,8 @@ namespace Src\Views\Components\Utils;
 
 function TextareaComponent(
     string $type = "text",
-    string $name = "", 
-    string $placeholder, 
+    string $name = "",  
+    string $placeholder = "", 
     string $icon = null, 
     string $label = null, 
     string $label_size = null,

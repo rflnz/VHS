@@ -41,7 +41,7 @@
 
 <body>
     <div>
-        
+        <?= HeaderComponent() ?>
     </div>
 
     <div class="flex">
@@ -50,7 +50,7 @@
         </div>
 
         <div class="flex flex-col gap-4 max-w-[1500px] mx-auto w-full">
-            <form class="text-white flex flex-col gap-2">
+            <form action="/VHS/src/application/controllers/RegisterEventController.php" method="POST" class="text-white flex flex-col gap-2">
                 <h1 class='text-title font-bold'>Criar conteúdo</h1>
                 <h1 class='text-paragraph text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</h1>
                 
@@ -69,7 +69,7 @@
                 <div id="date-event">
                     <h1 class="text-subtitle text-white font-semibold mt-4">Data do evento</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", name: "event_date", placeholder: "23/04/2025 ás 15h30") ?>
+                    <?= InputComponent(type: "text", name: "planned_events", placeholder: "23/04/2025 ás 15h30") ?>
                 </div>
 
                 <div id="thumb">
@@ -97,7 +97,7 @@
                 <div id="Title">
                     <h1 class="text-3xl text-white font-semibold mt-4">Título</h1>
                     <p class="text-paragraph text-gray-400 p-0 mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elit nisl,</p>
-                    <?= InputComponent(type: "text", name: "event_titulo", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
+                    <?= InputComponent(type: "text", name: "title", placeholder: "Tudo sobre o Next.js 15, nova arquitetura de pasta") ?>
                 </div>
 
                 <div id="Description">
@@ -109,7 +109,7 @@
                     <div class="">
                         <?= TextareaComponent(
                             type: "text",
-                            name: "event_description",
+                            name: "description",
                             placeholder: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.t, consectetur adipiscing elit.  😍😍😍",
                             height: 96,
                             multiline: true

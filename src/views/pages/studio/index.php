@@ -1,20 +1,21 @@
 <?php
-require "../../components/header/headerComponent.php";
-require "../../components/studioSideMenu/studioSideMenuComponent.php";
-require "../../components/utils/Title_and_buttons.php";
-require "../../components/utils/userActivityCardsComponent.php";
-require "../../components/charts/chartComponent.php";
-require "../../components/utils/buttonComponent.php";
-require "../../components/utils/comments/comentaryComponent.php";
-require "../../components/cards/studioVideoComponent.php";
+require_once __DIR__ . "../../../components/header/headerComponent.php";
+require_once __DIR__ . "../../../components/studioSideMenu/studioSideMenu.php";
+require_once __DIR__ . "../../../components/utils/Title_and_buttons.php";
+require_once __DIR__ . "../../../components/utils/userActivityCardsComponent.php";
+require_once __DIR__ . "../../../components/charts/chartComponent.php";
+require_once __DIR__ . "../../../components/utils/buttonComponent.php";
+require_once __DIR__ . "../../../components/utils/comments/comentaryComponent.php";
+require_once __DIR__ ."../../../components/cards/studioVideoComponent.php";
 
 use function Src\Views\Components\Cards\StudioVideoComponent;
 use function src\views\components\Charts\renderChartComponent;
 use function Src\Views\Components\Utils\Comment;
 use function src\views\components\utils\UserActivityCardsComponent;
 use function src\views\components\Utils\Title_and_buttons;
-use function src\views\components\studioSideMenu\StudioSideMenuComponent;
-use function src\views\components\Header\HeaderComponent;
+use function src\views\components\StudioSideMenuComponent;
+use function src\views\components\HeaderComponent;
+use function Src\Views\Components\StudioSideMenu;
 
 $seriesDataLine = [10, 15, 25, 20, 18, 12, 15];
 $categoriesLine = ['SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB', 'DOM'];
@@ -47,7 +48,7 @@ $botoes = [
 
     <div class="flex flex-col md:flex-row w-full">
         <div class="hidden md:block">
-            <?= StudioSideMenuComponent() ?>
+            <?= StudioSideMenu() ?>
         </div>
 
         <main class="max-w-[1500px] mx-auto">
