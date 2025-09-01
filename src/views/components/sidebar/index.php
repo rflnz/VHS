@@ -60,6 +60,7 @@ function SidebarComponent() {
                 <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1.5 rounded-lg icon min-w-8">
                     <img src="{$value['icon']}" alt="{$value['text']}" class="w-full h-full">
                 </a>
+
                 <a href="{$value['link']}" class="text-secondary
                     hover:text-gray-300 transition-all menu-text">
                     {$value['text']}
@@ -74,6 +75,7 @@ function SidebarComponent() {
                 <a href="{$value['link']}" class="size-8 bg-[#241A2F] p-1.5 rounded-lg icon min-w-8">
                     <img src="{$value['icon']}" alt="{$value['text']}" class="w-full h-full">
                 </a>
+
                 <a href="{$value['link']}" class="text-secondary
                     hover:text-gray-300 transition-all menu-text">
                     {$value['text']}
@@ -83,20 +85,20 @@ function SidebarComponent() {
     }
 
     return <<<HTML
-        <aside class="ml-8 transition-all">
-            <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">HOME</h3>
+        <aside class="ml-8 text-secondary transition-all">
+            <h3 class="text-sm my-4">HOME</h3>
             <ul class="flex flex-col gap-6">
                 $htmlHome
             </ul>
             
             <hr class="my-4 border-zinc-700 separator">
 
-            <h3 class="mb-4 text-secondary text-sm mt-6 mb-2">CATEGORIAS</h3>
+            <h3 class="categories-title text-sm my-4">CATEGORIAS</h3>
             <ul class="flex flex-col gap-6">
                 $htmlCategories
             </ul>
 
-            <script src="/VHS/src/views/components/sidebar/script.js"></script>
+            <script src="/VHS/src/views/components/sidebar/sidebar.js"></script>
         </aside>
     HTML;
 }
