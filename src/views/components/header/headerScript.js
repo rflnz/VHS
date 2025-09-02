@@ -35,6 +35,8 @@
     });
 
     document.getElementById('button-vhs-studio').addEventListener('click', () => {
+
+        //MUDAR PARA TELA
         window.location.href = '#';
     });
 

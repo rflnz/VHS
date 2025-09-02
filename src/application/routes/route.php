@@ -18,6 +18,7 @@ use Src\Application\Controllers\VerifyEmailViewController;
 use Src\Application\Middlewares\RedirectUserNotLoggedMiddleware;
 use Src\Application\Routes\Router;
 use Src\Controllers\SignInViewController;
+use Src\Application\Controllers\StudioCadastroViewController;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/../../..");
 $dotenv->load();
@@ -32,6 +33,7 @@ $router->post('/api/v1/auth/signup', SignUpController::class);
 
 
 $router->get('/home', HomeController::class);
+$router->get('/studio/cadastro', StudioCadastroViewController::class);
 
 #views routes
 $router->get('/home', HomeController::class, RedirectUserNotLoggedMiddleware::class);
