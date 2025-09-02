@@ -1,9 +1,9 @@
 const toggleButton = document.querySelector("#barrinha");
-const sidebar = document.querySelector("aside");
 const separator = document.querySelector(".separator");
 const title = document.querySelector(".categories-title");
 const texts = document.querySelectorAll(".menu-text");
 const icons = document.querySelectorAll(".icon");
+const sidebar = document.querySelector("aside");
 
 let isExpanded = true;
 
@@ -48,7 +48,7 @@ function toggleSidebar(state) {
 
     sidebar.style.width = isExpanded ? "9.3rem" : "5.35rem";
     separator.style.width = isExpanded ? "auto" : "2rem";
-    title.style.display = isExpanded ? "block" : "none";
+    title.style.display = isExpanded ? "flex" : "none";
 
     texts.forEach(text => {
         if (isExpanded) {
@@ -60,9 +60,7 @@ function toggleSidebar(state) {
 
         text.style.opacity = "0";
         text.style.transform = "translateX(-10px)";
-        setTimeout(() => {
-            text.style.display = "none";
-        }, 300);
+        text.style.display = "none";
     });
 }
 
