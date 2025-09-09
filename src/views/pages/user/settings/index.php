@@ -86,7 +86,7 @@ use function Src\views\Components\sidebar\SidebarComponent;
         </div>
         <div class="flex items-center justify-between w-full w-[30rem] gap-4 self-end">
             <?= ButtonComponent("Cancelar", "outline", null); ?>
-             <?= ButtonComponent("Salvar", "default", null); ?>
+             <?= ButtonComponent("Criar canal", "default", null); ?>
 
         </div>
     </div>
